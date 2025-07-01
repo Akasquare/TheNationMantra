@@ -1,0 +1,252 @@
+<style>
+  
+
+  .sidebar {
+    position: fixed;
+    top: 40px;
+    bottom: 0;
+    left: 10px;
+    width: 260px;
+    padding: 50px 20px 20px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    /* border-right: 1px solid #ddd; */
+  }
+
+  /* .sidebar-top {
+
+  } */
+  .sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* border-top: 2px solid #774646; */
+    padding-top: 10px;
+    flex-grow: 2;
+  }
+  div.icn {
+    width: 30px;
+    height: 30px;
+    border-radius: 99%;
+    display: flex;
+    background-color: rgb(62, 189, 212);
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+  }
+
+  .itm-in-row {
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    color: black;
+  }
+  a.nav-link {
+    color: #000;
+  }
+  a.nav-link:hover {
+    color: #fb0000;
+    transition: ease-in-out 0.3;
+  }
+  .appdwnload {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgb(228, 228, 228);
+    border-bottom: 1px solid rgb(228, 228, 228);
+  }
+  .googleplay {
+    width: 48%;
+    background-size: cover;
+  }
+  .appstore {
+    margin-left: 10px;
+    background-size: cover;
+
+    width: 48%;
+  }
+  .sidebar-popup {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    left: 200px;
+    width: 260px;
+    height: 330px;
+    padding: 50px 20px 20px;
+    background-color: #ffffff;
+
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    z-index: 100;
+    border: 1px solid #f8e6e6;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  .popup-wrapper:hover .sidebar-popup {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none; /* Hide sidebar on small screens */
+    }
+
+    .main-content {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<div class="sidebar">
+  <div class="sidebar-top">
+    <ul class="nav pb-1 flex-column">
+      <li class="nav-item itm-in-row">
+        <div class="icn mt-1">F</div>
+        <a class="nav-link text-danger" href="#">For You</a>
+      </li>
+      <li class="nav-item itm-in-row">
+        <div class="icn mt-1 bg-warning">N</div>
+        <a class="nav-link" href="#">News</a>
+      </li>
+      <li class="nav-item itm-in-row">
+        <div class="icn mt-1">
+          <img
+            class="rounded-circle w-100 h-100 img-fluid"
+            src="/image/football.webp"
+            alt="Football"
+          />
+        </div>
+        <a class="nav-link" href="#">Football</a>
+      </li>
+      <li class="nav-item itm-in-row">
+        <div class="icn mt-1">
+          <img
+            class="rounded-circle w-100 h-100 img-fluid"
+            src="/image/travel.webp"
+            alt="Travel"
+          />
+        </div>
+        <a class="nav-link" href="#">Travel</a>
+      </li>
+      <li class="nav-item itm-in-row">
+        <div class="icn mt-1">
+          <img
+            class="rounded-circle w-100 h-100 img-fluid"
+            src="/image/politics.png"
+            alt="Politics"
+          />
+        </div>
+        <a class="nav-link" href="#">Politics</a>
+      </li>
+      <li class="nav-item itm-in-row">
+        <div class="icn mt-1">
+          <img
+            class="rounded-circle w-100 h-100 img-fluid"
+            src="/image/cricet.webp"
+            alt="Cricket"
+          />
+        </div>
+        <a class="nav-link" href="#">Cricket</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-down pd-3">
+    <div class="pb-3 popup-wrapper">
+      <span class="popuphover nav-item itm-in-row pb-1">
+        <div class="icn mt-1">
+          <img
+            class="rounded-circle w-100 h-100 img-fluid"
+            src="/image/moreHashtag.jpeg"
+            alt="MoreHashtag"
+          />
+        </div>
+        <a class="nav-link p-2" href="#">More hashtags</a>
+      </span>
+      <div class="sidebar-popup">
+        <ul class="nav pb-1 flex-column">
+          <li class="nav-item itm-in-row">
+            <div class="icn mt-1">
+              <img
+                class="rounded-circle w-100 h-100 img-fluid"
+                src="/image/autoZone.webp"
+                alt="Auto Zone"
+              />
+            </div>
+            <a class="nav-link" href="#">Auto Zone</a>
+          </li>
+          <li class="nav-item itm-in-row">
+            <div class="icn mt-1">
+              <img
+                class="rounded-circle w-100 h-100 img-fluid"
+                src="/image/crime.webp"
+                alt="Crime"
+              />
+            </div>
+            <a class="nav-link" href="#">Crime</a>
+          </li>
+          <li class="nav-item itm-in-row">
+            <div class="icn mt-1">
+              <img
+                class="rounded-circle w-100 h-100 img-fluid"
+                src="/image/herTribe.png"
+                alt="HerTribe"
+              />
+            </div>
+            <a class="nav-link" href="#">HerTribe</a>
+          </li>
+          <li class="nav-item itm-in-row">
+            <div class="icn mt-1">
+              <img
+                class="rounded-circle w-100 h-100 img-fluid"
+                src="/image/movie.webp"
+                alt="Movie"
+              />
+            </div>
+            <a class="nav-link" href="#">Movie</a>
+          </li>
+          <li class="nav-item itm-in-row">
+            <div class="icn mt-1">
+              <img
+                class="rounded-circle w-100 h-100 img-fluid"
+                src="/image/crime.webp"
+                alt="Crime"
+              />
+            </div>
+            <a class="nav-link" href="#">Crime</a>
+          </li>
+          <li class="nav-item itm-in-row">
+            <div class="icn mt-1">
+              <img
+                class="rounded-circle w-100 h-100 img-fluid"
+                src="/image/herTribe.png"
+                alt="HerTribe"
+              />
+            </div>
+            <a class="nav-link" href="#">HerTribe</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="appdwnload pb-3 mb-5 mt-5">
+      <div class="googleplay h-100 w-100">
+        <img class="img-fluid" src="/image/googleplay.jpeg" alt="" />
+      </div>
+      <div class="appstore h-100 w-100">
+        <img class="img-fluid" src="/image/appstore.jpeg" alt="" />
+      </div>
+    </div>
+  </div>
+</div>

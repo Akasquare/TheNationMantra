@@ -1,0 +1,45 @@
+<!-- views/news/new.ejs -->
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-4">
+ 
+
+  <div class="row mt-2">
+    <div class="col-8 offset-2">
+      <div class="container">
+        <% if (currUser.role !== 'contributor') { %>
+        <p>You are not authorized to submit stories.</p>
+        <% } else { %>
+        <h2>Submit Your Story</h2>
+        <form action="/news/submit" method="POST"novalidate class="needs-validation" enctype="multipart/form-data">
+          <div class="mb-3">
+          <input name="title" placeholder="Title" required class="form-control" /> 
+          </div>
+          <div class="mb-3">
+          <textarea
+          class="form-control"
+            name="content"
+            placeholder="Content"
+            rows="6"
+            required
+          ></textarea>
+          </div>
+          <div class="mb-3">
+          <input type="file" name="image" class="form-control" placeholder="Image " required/>
+          </div>
+          <div class="mb-3">
+          <select name="category"class="form-control" required>
+            <option value="Politics">Politics</option>
+            <option value="Sports">Sports</option>
+            <option value="Business">Business</option></select
+          > </div>
+          <div class="mb-3 justify-content-center align-items-center ">
+          <button class=" btn rounded-lg btn-dark add-btn" type="submit">Post Story</button>
+
+          </div>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
