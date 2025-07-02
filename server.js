@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const store = MongoStore.create({
   // mongoUrl:dbUrl,
-  mongoUrl:process.env.MONGO_URI,
+  mongoUrl:dbUrl,
   crypto: {
     secret: process.env.SECRET,
   },
