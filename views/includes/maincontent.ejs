@@ -12,6 +12,7 @@
       margin-left: 0;
     }
   }
+  
   .btn {
     border-radius: 20px;
     background-color: rgb(104, 218, 218);
@@ -64,7 +65,7 @@
       <%= news.title %>
       <!-- <a href="/news/<%= news._id %>"><%= news.title %></a> -->
     </h3>
-    <% const newsURL = `http://localhost:8080/news/${news._id}`; const shareText
+    <% const newsURL = `https://thenationmantra.onrender.com/news/article/${news._id}`; const shareText
     = encodeURIComponent(`${news.title} - Read more: ${newsURL}`); %>
     <div class="flex d-flex justify-content-between align-items-center">
       <small><%= news.category %> | <%= news.timestamp.toDateString() %></small>

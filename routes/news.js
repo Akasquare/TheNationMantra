@@ -32,8 +32,9 @@ router.get('/article/:id', async (req, res) => {
 // Contributor dashboard
 
 router.get('/dashboard', isContributor, async (req, res) => {
-  const userPosts = await News.find({ author: req.user._id });
+  const userPosts = await News.find({ author: req.user._id }).populate('author');
   console.log(req.user);
+  console.log(userPosts);
   res.render("listings/dashboard", { user: req.user, posts: userPosts });
 });
 
