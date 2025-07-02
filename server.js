@@ -92,21 +92,9 @@ const authRoutes = require("./routes/auth");
 const newsRoutes = require("./routes/news");
 
 
-
-
 app.use("/auth",authRoutes);
 app.use("/news", newsRoutes);
 
-
-
-app.get("/delete-all", async (req, res) => {
-  try {
-    await News.deleteMany({});
-    res.send("✅ All news deleted successfully.");
-  } catch (err) {
-    res.status(500).send("❌ Error deleting news.");
-  }
-});
 
 
 app.use( (req, res,next)=>{
@@ -121,7 +109,7 @@ app.all("*", (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  
+  console.error("🔥 FULL ERROR:", err);
   let { statusCode = 500, message = "Something went wrong" } = err;
   res.status(statusCode).send(message);
 });

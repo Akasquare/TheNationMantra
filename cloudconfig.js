@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
   params: {
     folder: "TheNation_Mantra/News",
     allowed_formats: ["jpeg", "png", "jpg","webp"],
-    public_id: (req, file) => 'computed-filename-using-request',
+     
   },
 });
 
