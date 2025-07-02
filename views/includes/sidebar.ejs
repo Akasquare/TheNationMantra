@@ -1,6 +1,4 @@
 <style>
-  
-
   .sidebar {
     position: fixed;
     top: 40px;
@@ -97,7 +95,6 @@
     visibility: visible;
   }
 
-
   @media (max-width: 768px) {
     .sidebar {
       display: none; /* Hide sidebar on small screens */
@@ -114,11 +111,18 @@
     <ul class="nav pb-1 flex-column">
       <li class="nav-item itm-in-row">
         <div class="icn mt-1">F</div>
-        <a class="nav-link text-danger" href="#">For You</a>
+        <a class="nav-link text-danger" href="/news">For You</a>
       </li>
+       
       <li class="nav-item itm-in-row">
-        <div class="icn mt-1 bg-warning">N</div>
-        <a class="nav-link" href="#">News</a>
+        <div class="icn mt-1">
+          <img
+            class="rounded-circle w-100 h-100 img-fluid"
+            src="/image/technology.png"
+            alt="Business"
+          />
+        </div>
+        <a href="/news/filter?q=Business" class="nav-link ">Business</a>
       </li>
       <li class="nav-item itm-in-row">
         <div class="icn mt-1">
@@ -128,7 +132,17 @@
             alt="Football"
           />
         </div>
-        <a class="nav-link" href="#">Football</a>
+        <a href="/news/filter?q=Football" class="nav-link ">Football</a>
+      </li>
+      <li class="nav-item itm-in-row">
+        <div class="icn mt-1">
+          <img
+            class="rounded-circle w-100 h-100 img-fluid"
+            src="/image/education.jpg"
+            alt="Education"
+          />
+        </div>
+        <a href="/news/filter?q=Education" class="nav-link ">Education</a>
       </li>
       <li class="nav-item itm-in-row">
         <div class="icn mt-1">
@@ -138,7 +152,7 @@
             alt="Travel"
           />
         </div>
-        <a class="nav-link" href="#">Travel</a>
+        <a class="nav-link" href="/news/filter?q=Travel">Travel</a>
       </li>
       <li class="nav-item itm-in-row">
         <div class="icn mt-1">
@@ -148,7 +162,7 @@
             alt="Politics"
           />
         </div>
-        <a class="nav-link" href="#">Politics</a>
+        <a class="nav-link" href="/news/filter?q=Politics">Politics</a>
       </li>
       <li class="nav-item itm-in-row">
         <div class="icn mt-1">
@@ -158,7 +172,7 @@
             alt="Cricket"
           />
         </div>
-        <a class="nav-link" href="#">Cricket</a>
+        <a class="nav-link" href="/news/filter?q=Cricket">Cricket</a>
       </li>
     </ul>
   </div>
@@ -185,7 +199,7 @@
                 alt="Auto Zone"
               />
             </div>
-            <a class="nav-link" href="#">Auto Zone</a>
+            <a class="nav-link" href="/news/filter?q=Auto Zone">Auto Zone</a>
           </li>
           <li class="nav-item itm-in-row">
             <div class="icn mt-1">
@@ -195,17 +209,17 @@
                 alt="Crime"
               />
             </div>
-            <a class="nav-link" href="#">Crime</a>
+            <a class="nav-link" href="/news/filter?q=Crime">Crime</a>
           </li>
           <li class="nav-item itm-in-row">
             <div class="icn mt-1">
               <img
                 class="rounded-circle w-100 h-100 img-fluid"
-                src="/image/herTribe.png"
+                src="/image/ai.jpeg"
                 alt="HerTribe"
               />
             </div>
-            <a class="nav-link" href="#">HerTribe</a>
+            <a class="nav-link" href="/news/filter?q=HerTribe">HerTribe</a>
           </li>
           <li class="nav-item itm-in-row">
             <div class="icn mt-1">
@@ -215,27 +229,27 @@
                 alt="Movie"
               />
             </div>
-            <a class="nav-link" href="#">Movie</a>
+            <a class="nav-link" href="/news/filter?q=Movie">Movie</a>
           </li>
           <li class="nav-item itm-in-row">
             <div class="icn mt-1">
               <img
                 class="rounded-circle w-100 h-100 img-fluid"
-                src="/image/crime.webp"
-                alt="Crime"
+                src="/image/technology.png"
+                alt="Technology"
               />
             </div>
-            <a class="nav-link" href="#">Crime</a>
+            <a class="nav-link" href="/news/filter?q=Technology">Technology</a>
           </li>
           <li class="nav-item itm-in-row">
             <div class="icn mt-1">
               <img
                 class="rounded-circle w-100 h-100 img-fluid"
-                src="/image/herTribe.png"
-                alt="HerTribe"
+                src="/image/ai.jpeg"
+                alt="AI"
               />
             </div>
-            <a class="nav-link" href="#">HerTribe</a>
+            <a class="nav-link" href="/news/filter?q=AI">AI</a>
           </li>
         </ul>
       </div>
