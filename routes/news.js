@@ -15,7 +15,7 @@ router.get(
   wrapAsync(async (req, res) => {
     const topNews = await News.find()
       .sort({ timestamp: -1 })
-      .limit(10)
+      .limit(5)
       .populate("author");
     res.render("listings/index.ejs", { newsList: topNews });
   })
@@ -96,5 +96,21 @@ router.get("/filter", async (req, res) => {
 router.get("/new", (req, res) => {
   res.render("news/new");
 });
+
+// api paginated
+router.get("/api", async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+  const skip = (page - 1) * limit;
+
+  const newsList = await News.find({})
+    .sort({ timestamp: -1 })
+    .skip(skip)
+    .limit(limit)
+    .populate("author");
+
+  res.json(newsList); // Return as JSON
+});
+
 
 module.exports = router;
