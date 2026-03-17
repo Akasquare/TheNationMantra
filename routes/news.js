@@ -23,7 +23,7 @@ router.get(
 
 // Article Page
 router.get("/article/:id", async (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   const article = await News.findById(req.params.id).populate("author");
   res.render("listings/article.ejs", { article });
 });
@@ -34,8 +34,8 @@ router.get("/dashboard", isContributor, async (req, res) => {
   const userPosts = await News.find({ author: req.user._id }).populate(
     "author"
   );
-  console.log(req.user);
-  console.log(userPosts);
+  // console.log(req.user);
+  // console.log(userPosts);
   res.render("listings/dashboard", { user: req.user, posts: userPosts });
 });
 
@@ -111,6 +111,47 @@ router.get("/api", async (req, res) => {
 
   res.json(newsList); // Return as JSON
 });
+
+// summarization route
+
+const axios = require("axios");
+
+router.post("/summarize", async (req, res) => {
+  try {
+    const content = req.body.content;
+
+    if (!content || content.length < 50) {
+      return res.json({ summary: "Content too short to summarize." });
+    }
+    
+    const response = await axios.post(
+      "https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn",
+      {
+        inputs: content,
+        parameters: {
+          max_length: 150,
+          min_length: 50,
+          do_sample: false
+        }
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.HUGGINGFACE_TOKEN}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    const summary = response.data[0].summary_text;
+
+    res.json({ summary });
+
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({ summary: "Error generating summary." });
+  }
+});
+
 
 
 module.exports = router;

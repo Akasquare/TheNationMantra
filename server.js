@@ -65,7 +65,7 @@ app.get("/", (req, res) => {
   console.log("root middleware");
   res.redirect("/news");
 });
-
+app.use(express.json());
 app.use(session(sessionOptions));
 app.use(flash());
 

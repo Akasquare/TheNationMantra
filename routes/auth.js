@@ -1,6 +1,6 @@
 // routes/auth.js
 const express = require("express");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const router = express.Router();
 const User = require("../models/User.js");
 const News = require("../models/News");
@@ -33,7 +33,7 @@ router.post(
       // Register using passport-local-mongoose
       const user = new User({ email, name, role });
       const registeredUser = await User.register(user, password);
-      console.log(registeredUser);
+      // console.log(registeredUser);
       // Auto-login after registration
       req.login(registeredUser, (err) => {
         if (err) return next(err);

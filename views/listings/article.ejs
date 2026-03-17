@@ -1,15 +1,47 @@
 <% layout("layouts/boilerplate") %>
 
 <div class="row mt-3">
-  <div class="col-8 offset-2">
-    <h2><%= article.title %></h2>
-
-    <img class="img-fluid" src="<%= article.image.url %>" width="400" /><br />
-    <small
-      ><%= article.category %> | <%= article.timestamp.toDateString() %></small
-    >
-    <br><hr>
-    <p><%= article.content %></p>
-    <p>By <%= article.author.name %></p>
-  </div>
+   <div class="col-8 offset-2">
+      <h2><%= article.title %></h2>
+      <div>
+         <img
+            class="img-fluid"
+            src="<%= article.image.url %>"
+            width="400"
+         /><br />
+         <button
+            onclick="getSummary(this)"
+            data-content="<%- article.content %>"
+         >
+            🧠 Generate AI Summary
+         </button>
+         <div id="summaryBox" style="margin-top: 20px; font-weight: bold"></div>
+      </div>
+      <small
+         ><%= article.category %> | <%= article.timestamp.toDateString()
+         %></small
+      >
+      <br />
+      <hr />
+      <p><%= article.content %></p>
+      <p>By <%= article.author.name %></p>
+   </div>
 </div>
+<script>
+  async function getSummary(button) {
+
+    const content = button.dataset.content;
+
+    document.getElementById("summaryBox").innerText = "Generating summary...";
+
+    const res = await fetch("/news/summarize", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content })
+    });
+
+    const data = await res.json();
+
+    document.getElementById("summaryBox").innerText = data.summary;
+  }
+</script>
