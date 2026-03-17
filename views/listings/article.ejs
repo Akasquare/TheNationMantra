@@ -1,32 +1,71 @@
 <% layout("layouts/boilerplate") %>
 
-<div class="row mt-3">
-   <div class="col-8 offset-2">
-      <h2><%= article.title %></h2>
-      <div>
-         <img
-            class="img-fluid"
-            src="<%= article.image.url %>"
-            width="400"
-         /><br />
-         <button
-            onclick="getSummary(this)"
-            data-content="<%- article.content %>"
-         >
-            🧠 Generate AI Summary
-         </button>
-         <div id="summaryBox" style="margin-top: 20px; font-weight: bold"></div>
+<div class="container mt-5">
+   <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+         <!-- Article Card -->
+         <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+
+            <!-- Image -->
+            <img
+               src="<%= article.image.url %>"
+               class="card-img-top"
+               style="height: 350px; object-fit: cover;"
+            />
+
+            <div class="card-body p-4">
+
+               <!-- Title -->
+               <h2 class="fw-bold mb-3"><%= article.title %></h2>
+
+               <!-- Meta Info -->
+               <div class="d-flex justify-content-between text-muted mb-3">
+                  <small>
+                     📂 <%= article.category %>
+                  </small>
+                  <small>
+                     🗓 <%= article.timestamp.toDateString() %>
+                  </small>
+               </div>
+
+               <!-- AI Summary Button -->
+               <button
+                  onclick="getSummary(this)"
+                  data-content="<%- article.content %>"
+                  class="btn btn-dark rounded-pill px-4 mb-3"
+               >
+                  🧠 Generate AI Summary
+               </button>
+
+               <!-- Summary Box -->
+               <div
+                  id="summaryBox"
+                  class="p-3 rounded-3 bg-light border mb-4"
+                  style="min-height: 60px;"
+               >
+                  <span class="text-muted">AI summary will appear here...</span>
+               </div>
+
+               <hr />
+
+               <!-- Content -->
+               <p class="fs-5" style="line-height: 1.8;">
+                  <%= article.content %>
+               </p>
+
+               <!-- Author -->
+               <div class="mt-4 text-end">
+                  <span class="fw-semibold">✍️ By <%= article.author.name %></span>
+               </div>
+
+            </div>
+         </div>
+
       </div>
-      <small
-         ><%= article.category %> | <%= article.timestamp.toDateString()
-         %></small
-      >
-      <br />
-      <hr />
-      <p><%= article.content %></p>
-      <p>By <%= article.author.name %></p>
    </div>
 </div>
+
 <script>
   async function getSummary(button) {
 

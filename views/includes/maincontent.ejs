@@ -1,263 +1,187 @@
 <style>
   .main-content {
     margin-left: 260px;
-    padding: 20px;
+    padding: 30px;
+    background: #f5f7fb;
   }
+
   @media (max-width: 768px) {
     .sidebar {
-      display: none; /* Hide sidebar on small screens */
+      display: none;
     }
-
     .main-content {
       margin-left: 0;
     }
   }
 
+  /* News Card */
+  .news-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .news-card img {
+    border-radius: 14px;
+    object-fit: cover;
+    max-height: 350px;
+  }
+
+  .news-card h3 {
+    font-weight: 700;
+    margin-top: 15px;
+  }
+
+  .news-card p {
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Author */
+  .author {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Buttons */
   .btn {
-    border-radius: 20px;
-    background-color: rgb(104, 218, 218);
+    border-radius: 30px;
+    padding: 8px 22px;
+    font-weight: 500;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
   }
+
   .btn:hover {
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.3s ease-in-out;
-    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
   }
+
+  /* Icons */
   .icn {
-    height: 25px;
-    width: 25px;
+    height: 35px;
+    width: 35px;
+    padding: 6px;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+
+  .icn:hover {
+    transform: scale(1.15);
+    background: #f1f1f1;
+  }
+
+  /* Meta */
+  .meta {
+    font-size: 14px;
+    color: #777;
+  }
+
+  /* Loader */
+  #loader {
+    font-weight: 500;
   }
 </style>
 
 <div class="main-content border-0">
-  <!-- <form action="/search" method="GET">
-      <input type="text" name="q" placeholder="Search news...">
-      <select name="category">
-        <option value="">All</option>
-        <option value="Politics">Politics</option>
-        <option value="Sports">Sports</option>
-        <option value="Business">Business</option>
-      </select>
-      <button type="submit">Search</button>
-    </form> -->
   <div id="newsContainer">
     <% if (!newsList || newsList.length === 0) { %>
-    <div class="text-center mt-5 p-4 bg-light border rounded shadow-sm">
-      <h4 class="text-muted">Oops! No news content found.</h4>
+    <div class="text-center mt-5 p-5 bg-white border rounded shadow-sm">
+      <h4 class="text-muted">📰 No news available right now</h4>
     </div>
-    <% } else { %> <% newsList.forEach(news => { %>
+    <% } else { %>
+
+    <% newsList.forEach(news => { %>
     <div class="news-card">
-      <div>
-        <div></div>
-        <div>
-          <h5>
-            <%= news.author.name %> &nbsp;<img
-              class="img-fluid"
-              src="/image/tick.svg"
-              alt="ticked"
-            />
-          </h5>
-        </div>
+
+      <!-- Author -->
+      <div class="author">
+        <%= news.author.name %>
+        <img class="img-fluid" src="/image/tick.svg" alt="verified" width="18"/>
       </div>
-      <br />
-      <div >
+
+      <!-- Image -->
+      <div class="mt-3">
         <img
-          class="w-100 h-100 rounded-4 border img-fluid"
+          class="w-100 img-fluid"
           src="<%=news.image.url%>"
-          alt=""
-          
+          alt="news"
         />
       </div>
-      <h3 class="lh-norm">
-        <%= news.title %>
-        <!-- <a href="/news/<%= news._id %>"><%= news.title %></a> -->
-      </h3>
+
+      <!-- Title -->
+      <h3><%= news.title %></h3>
+
       <% const newsURL =
-      `https://thenationmantra.onrender.com/news/article/${news._id}`; const
-      shareText = encodeURIComponent(`${news.title} - Read more: ${newsURL}`);
-      %>
-      <div class="flex d-flex justify-content-between align-items-center">
-        <small
-          ><%= news.category %> | <%= news.timestamp.toDateString() %></small
-        >
+      `https://thenationmantra.onrender.com/news/article/${news._id}`; 
+      const shareText = encodeURIComponent(`${news.title} - Read more: ${newsURL}`); %>
+
+      <!-- Meta + Share -->
+      <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
+        <small class="meta">
+          <%= news.category %> | 🗓 <%= news.timestamp.toDateString() %>
+        </small>
+
         <div>
-          <ul class="flex d-flex justify-content-center">
-            <!-- WhatsApp -->
-            <li class="nav-item itm-in-row">
-              <a
-                href="https://api.whatsapp.com/send?text=<%= shareText %>"
-                target="_blank"
-              >
-                <div class="icn bg-light">
-                  <img
-                    class="rounded-circle img-fluid"
-                    src="/image/whatsapp.svg"
-                    alt="whatsapp"
-                  />
+          <ul class="d-flex gap-2 list-unstyled m-0">
+
+            <li>
+              <a href="https://api.whatsapp.com/send?text=<%= shareText %>" target="_blank">
+                <div class="icn">
+                  <img class="img-fluid" src="/image/whatsapp.svg" />
                 </div>
               </a>
             </li>
 
-            <!-- Facebook -->
-            <li class="nav-item itm-in-row">
-              <a
-                href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(newsURL) %>"
-                target="_blank"
-              >
-                <div class="icn bg-light">
-                  <img
-                    class="rounded-circle img-fluid"
-                    src="/image/fb.svg"
-                    alt="Facebook"
-                  />
+            <li>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(newsURL) %>" target="_blank">
+                <div class="icn">
+                  <img class="img-fluid" src="/image/fb.svg" />
                 </div>
               </a>
             </li>
 
-            <!-- Twitter -->
-            <li class="nav-item itm-in-row">
-              <a
-                href="https://twitter.com/intent/tweet?text=<%= shareText %>"
-                target="_blank"
-              >
-                <div class="icn bg-light">
-                  <img
-                    class="rounded-circle img-fluid"
-                    src="/image/tweet.svg"
-                    alt="tweet"
-                  />
+            <li>
+              <a href="https://twitter.com/intent/tweet?text=<%= shareText %>" target="_blank">
+                <div class="icn">
+                  <img class="img-fluid" src="/image/tweet.svg" />
                 </div>
               </a>
             </li>
+
           </ul>
         </div>
       </div>
+
+      <!-- Content Preview -->
       <p><%= news.content.substring(0, 250) %>...</p>
-      <div class="d-flex justify-content-center align-items-center">
+
+      <!-- Button -->
+      <div class="text-center">
         <button
-          class="btn bg-info text-light btn-primary"
+          class="btn text-light"
           onclick="window.location.href='/news/article/<%= news._id %>'"
         >
-          Read More
+          Read Full Article →
         </button>
       </div>
-    </div>
-    <% }) %> <% } %>
-  </div>
-  <div id="loader" class="text-center text-muted p-2">Loading more news...</div>
 
+    </div>
+    <% }) %>
+    <% } %>
+  </div>
+
+  <div id="loader" class="text-center text-muted p-3">
+     Loading more news...
+  </div>
 </div>
-<script>
-  let page = 2; // first page is already loaded
-  let isLoading = false;
-
-  async function loadMoreNews() {
-    if (isLoading) return;
-    isLoading = true;
-
-    try {
-      const res = await fetch(`/news/api?page=${page}&limit=5`);
-      const data = await res.json();
-
-      if (data.length === 0) {
-        document.getElementById("loader").innerText = "No more news.";
-        return;
-      }
-
-      const container = document.getElementById("newsContainer");
-
-      data.forEach((news) => {
-        const card = document.createElement("div");
-        card.classList.add("news-card");
-        card.innerHTML = `
-  <div>
-    <div></div>
-    <div>
-      <h5>
-        ${news.author?.name || "Anonymous"} &nbsp;
-        <img class="img-fluid" src="/image/tick.svg" alt="ticked" />
-      </h5>
-    </div>
-  </div>
-  <br />
-  <div>
-    <img
-      class="w-100 h-100 rounded img-fluid"
-      src="${news.image?.url || "/image/default.jpg"}"
-      alt="news"
-    />
-  </div>
-  <h3 class="lh-norm">${news.title}</h3>
-
-  <div class="flex d-flex justify-content-between align-items-center">
-    <small>${news.category} | ${new Date(news.timestamp).toDateString()}</small>
-    <div>
-      <ul class="flex d-flex justify-content-center">
-        <!-- WhatsApp -->
-        <li class="nav-item itm-in-row">
-          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(
-            news.title +
-              " - Read more: https://thenationmantra.onrender.com/news/article/" +
-              news._id
-          )}" target="_blank">
-            <div class="icn bg-light">
-              <img class="rounded-circle img-fluid" src="/image/whatsapp.svg" alt="whatsapp" />
-            </div>
-          </a>
-        </li>
-        <!-- Facebook -->
-        <li class="nav-item itm-in-row">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-            "https://thenationmantra.onrender.com/news/article/" + news._id
-          )}" target="_blank">
-            <div class="icn bg-light">
-              <img class="rounded-circle img-fluid" src="/image/fb.svg" alt="Facebook" />
-            </div>
-          </a>
-        </li>
-        <!-- Twitter -->
-        <li class="nav-item itm-in-row">
-          <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(
-            news.title +
-              " - Read more: https://thenationmantra.onrender.com/news/article/" +
-              news._id
-          )}" target="_blank">
-            <div class="icn bg-light">
-              <img class="rounded-circle img-fluid" src="/image/tweet.svg" alt="tweet" />
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <p>${news.content.substring(0, 250)}...</p>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <button class="btn bg-info text-light btn-primary" onclick="window.location.href='/news/article/${
-      news._id
-    }'">
-      Read More
-    </button>
-  </div>
-`;
-
-        container.appendChild(card);
-      });
-
-      page++;
-    } catch (err) {
-      console.error("Failed to load more news:", err);
-    }
-
-    isLoading = false;
-  }
-
-  window.addEventListener("scroll", () => {
-    if (
-      window.innerHeight + window.scrollY >=
-      document.body.offsetHeight - 500
-    ) {
-      loadMoreNews();
-    }
-  });
-</script>
